@@ -6,7 +6,7 @@ Exercise 1-4-1
 
 package main
 
-/*import (
+import (
 	"bytes"
 	"image"
 	color "image/color"
@@ -63,5 +63,4 @@ func lissajous(out io.Writer) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-}*/
+}
