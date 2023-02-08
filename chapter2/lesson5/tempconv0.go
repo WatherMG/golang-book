@@ -5,7 +5,14 @@ Example 2-5-1
 
 package tempconv
 
+import "fmt"
+
 type Celsius float64
+
+func (c Celsius) String() string {
+	return fmt.Sprintf("%g°C", c)
+}
+
 type Fahrenheit float64
 
 const (
