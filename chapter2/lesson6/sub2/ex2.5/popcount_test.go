@@ -50,7 +50,7 @@ func PopCountShiftValue(x uint64) int {
 
 // PopCountDiscardBit - Exercise 2.5
 func PopCountDiscardBit(x uint64) (value int) {
-	if x != 0 {
+	for x != 0 {
 		x &= x - 1
 		value++
 	}

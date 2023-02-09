@@ -27,25 +27,28 @@ func PopCount(x uint64) int {
 		pc[byte(x>>(7*8))])
 }
 
+// TableLoop - Exercise 2.3
 func TableLoop(x uint64) int {
 	sum := 0
 	for i := 0; i < 8; i++ {
-		sum += int(pc[byte(x>>(i*8))])
+		sum += int(pc[byte(x>>uint(i))])
 	}
 	return sum
 }
 
+// bench - Exercise 2.3
 func bench(b *testing.B, f func(uint64) int) {
 	for i := 0; i < b.N; i++ {
 		f(uint64(i))
 	}
 }
 
+// BenchmarkTable - Exercise 2.3
 func BenchmarkTable(b *testing.B) {
 	bench(b, PopCount)
 }
 
+// BenchmarkTableLoop - Exercise 2.3
 func BenchmarkTableLoop(b *testing.B) {
 	bench(b, TableLoop)
 }
-
