@@ -36,7 +36,7 @@ func main() {
 }
 
 func lissajous(out io.Writer) {
-	rand.Seed(time.Now().UTC().UnixNano())
+	rand.New(rand.NewSource(time.Now().UTC().UnixNano()))
 	palette := make([]color.Color, 0, nframes)
 	palette = append(palette, color.RGBA{A: 255})
 	freq := rand.Float64() * 3.0        // Относительная частота колебаний у
