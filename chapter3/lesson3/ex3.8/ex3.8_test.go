@@ -12,25 +12,17 @@ func bench(b *testing.B, f func(complex128) color.Color) {
 }
 
 func BenchmarkMandelbrotComplex64(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		bench(b, mandelbrot64)
-	}
+	bench(b, mandelbrot64)
 }
 
 func BenchmarkMandelbrotComplex128(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		bench(b, mandelbrot128)
-	}
+	bench(b, mandelbrot128)
 }
 
 func BenchmarkMandelbrotBigFloat(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		bench(b, mandelbrotBigFloat)
-	}
+	bench(b, mandelbrotBigFloat)
 }
 
 func BenchmarkMandelbrotBigRat(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		bench(b, mandelbrotBigRat)
-	}
+	bench(b, mandelbrotBigRat)
 }
