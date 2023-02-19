@@ -1,5 +1,5 @@
 /*
-Exercise 2-6-1 (2.2)
+Exercise (2.2)
 lesson2.2 prints measurements given on the command line or stdin in various units
 */
 
