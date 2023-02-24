@@ -1,5 +1,5 @@
 /*
-Example 4.5
+Exercise 4.5
 Напишите функцию, которая без выделения дополнительной памяти удаляет все смежные дубликаты в срезе []string.
 */
 
@@ -8,7 +8,7 @@ package main
 import "fmt"
 
 func main() {
-	s := []string{"a", "a", "a", "b", "b", "c", "c", "a", "a", "b", "b", "c", "c", "a", "a", "b", "b", "c", "c"}
+	s := []string{"a", "a", "a", "b", "b", "c", "c"}
 	fmt.Println(unique(s))
 }
 
