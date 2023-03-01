@@ -123,7 +123,6 @@ func openEditor(p *issue.Params) *issue.Params {
 }
 
 func updateIssue() {
-
 	p := issue.Params{
 		Owner: githubUser, Repo: *repo,
 		Issue: issue.Issue{

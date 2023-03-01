@@ -37,7 +37,7 @@ func getURL(url string) (*http.Response, error) {
 		return nil, err
 	}
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Response error: %s\n", err)
+		return nil, fmt.Errorf("Response error: %s on page: %s\n", resp.Status, resp.Request.URL)
 	}
 	return resp, nil
 }
