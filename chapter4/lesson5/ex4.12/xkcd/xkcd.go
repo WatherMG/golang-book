@@ -108,11 +108,7 @@ func match(c *Comic, term string) bool {
 }
 
 func (c *Comic) String() string {
-	return fmt.Sprintf("Comic: #%d\n", c.Num) +
-		fmt.Sprintf("Title: %s\n", c.Title) +
-		fmt.Sprintf("Image: %s\n", c.Img) +
-		fmt.Sprintf("Transcriprion: %s\n", c.Transcript) +
-		fmt.Sprintf("URL: %s\n", c.Link) +
-		fmt.Sprintf("Created at: %s-%s-%s", c.Day, c.Month, c.Year)
+	return fmt.Sprintf("Comic: #%d\nTitle: %s\nImage: %s\nTranscriprion: %s\nURL: %s\nCreated at: %s-%s-%s",
+		c.Num, c.Title, c.Img, c.Transcript, c.Link, c.Day, c.Month, c.Year)
 
 }
