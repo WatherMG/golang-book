@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issues search</title>
+</head>
+<body>
+<h1>{{.Login}}</h1>
+{{if .Name}}
+<h2>{{.Name}}</h2>
+{{end}}
+<dl>
+    <dt>User</dt>
+    <dd><a href="{{.HTMLURL}}">{{.Login}}</a></dd>
+    <dt>Type</dt>
+    <dd>{{.Type}}</dd>
+    <dt>Location</dt>
+    <dd>{{.Location}}</dd>
+    <dt>Email</dt>
+    <dd>{{.Email}}</dd>
+    <dt>BIO</dt>
+    <dd>{{.BIO}}</dd>
+    <dt>PublicRepos</dt>
+    <dd>{{.PublicRepos}}</dd>
+    <dt>Followers</dt>
+    <dd>{{.Followers}}</dd>
+
+</dl>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issues search</title>
+</head>
+<body>
+<h1>{{.Issues | len}} тем:</h1>
+<table>
+    <thead>
+    <tr style="text-align: left">
+        <th>#</th>
+        <th>Title</th>
+        <th>Milestone</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>User</th>
+        <th>Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{range .Issues}}
+    <tr>
+        <td><a href="{{.IssueURL}}">{{.Number}}</a></td>
+        <td><a href="{{.IssueURL}}">{{.Title | printf "%.74s"}}</a></td>
+        {{if .Milestone}}
+        <td><a href="{{.MilestoneURL}}">{{.Milestone.Title | printf "%.15s"}}</a></td>
+        <td>{{.Milestone.Description | printf "%.120s"}}</td>
+        {{else}}
+        <td></td>
+        <td></td>
+        {{end}}
+        <td>{{.State}}</td>
+        <td><a href="{{.User.UserURL}}">{{.User.Login}}</a></td>
+        <td>{{.CreatedAt | formatDate}} days</td>
+    </tr>
+    {{end}}
+    </tbody>
+</table>
+</body>
+</html>
