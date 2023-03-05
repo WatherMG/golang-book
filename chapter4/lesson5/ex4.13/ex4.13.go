@@ -20,7 +20,7 @@ import (
 	"regexp"
 	"strings"
 
-	"GolangBook/chapter4/lesson5/ex4.13/poster"
+	"GolangBook/chapter4/lesson5/ex4.13/movie"
 )
 
 func init() {
@@ -33,9 +33,10 @@ var (
 	apiKey = flag.String("key", "", "Api key")
 )
 
-// usage: run main.go -t MOVIE_NAME || -i MOVIE_IMDb_NUMBER && -key=1239871 if key is not in ENV
+// usage: run main.go MOVIE_NAME || -i MOVIE_IMDb_NUMBER && -key=######## if key is not in ENV
 func main() {
 	t = flag.Args()
+
 	if os.Getenv("OMDBAPI_KEY") == "" {
 		err := os.Setenv("OMDBAPI_KEY", *apiKey)
 		if err != nil {
@@ -44,13 +45,13 @@ func main() {
 	}
 	if len(flag.Args()) != 0 {
 
-		m, err := poster.GetFromTitle(t)
+		m, err := movie.GetFromTitle(t)
 		if err != nil {
 			log.Fatal(err)
 		}
 		downloadPoster(m)
 	} else if len(*i) != 0 {
-		m, err := poster.GetFromIMDb(*i)
+		m, err := movie.GetFromIMDb(*i)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -61,8 +62,9 @@ func main() {
 	}
 }
 
-func downloadPoster(m *poster.Movie) {
+func downloadPoster(m *movie.Movie) {
 	re := regexp.MustCompile("[^a-zA-Z0-9-_]+")
+
 	q := re.ReplaceAllString(strings.Join(t, " "), " ")
 
 	resp, err := http.Get(m.Poster)

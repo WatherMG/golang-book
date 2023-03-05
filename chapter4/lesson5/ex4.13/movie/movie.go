@@ -7,7 +7,7 @@ The JSON-based web service of the Open Movie Database lets you search https://om
 download its poster image. Write a tool poster that downloads the poster image for the movie named on the command line.
 */
 
-package poster
+package movie
 
 import (
 	"encoding/json"
@@ -23,13 +23,7 @@ import (
 const baseAPI = "https://www.omdbapi.com/"
 
 type Movie struct {
-	Title    string `json:"title,omitempty"`
-	Year     string `json:"year,omitempty"`
-	Released string `json:"released,omitempty"`
-	Genre    string `json:"genre,omitempty"`
-	Country  string `json:"country,omitempty"`
 	Poster   string `json:"poster,omitempty"`
-	Plot     string `json:"plot,omitempty"`
 	Response string `json:"Response"`
 }
 
@@ -66,7 +60,7 @@ func getMovieFromURL(u string) (*Movie, error) {
 
 	var movie Movie
 	if err := json.NewDecoder(resp.Body).Decode(&movie); err != nil {
-		return nil, fmt.Errorf("can't parse json: %s", err)
+		return nil, fmt.Errorf("can't unmarshaling response: %s", err)
 	}
 	response, err := strconv.ParseBool(movie.Response)
 	if err != nil {
