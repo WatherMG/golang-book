@@ -16,20 +16,26 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
 	"GolangBook/chapter4/lesson6/ex4.14/issues"
 )
 
 var p = "chapter4/lesson6/ex4.14/templates"
-var issueListTemplate = template.Must(template.New("issueList.html").Funcs(
-	template.FuncMap{"formatDate": formatDate}).ParseFiles(p + "/issueList.html"))
+var issueListTemplate = template.Must(template.New("issueList.html").ParseFiles(p + "/issueList.html"))
 var issueTemplate = template.Must(template.ParseFiles(p + "/issue.html"))
 var milestoneTemplate = template.Must(template.ParseFiles(p + "/milestone.html"))
 var userTemplate = template.Must(template.ParseFiles(p + "/user.html"))
 
 var cache *issues.Cache
 var searchQuery string
+
+func init() {
+	cache = &issues.Cache{
+		IssuesByID:     make(map[int]*issues.Issue),
+		MilestonesByID: make(map[int]*issues.Milestone),
+		Users:          make(map[string]*issues.User),
+	}
+}
 
 // run in browser type localhost:8000/?q=repo:golang/go%20is:open%20json%20decoder
 // or localhost:8000/?q=SEARCH_QUERY
@@ -52,12 +58,6 @@ func getIssuesList(w http.ResponseWriter, r *http.Request) {
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
-			}
-
-			cache = &issues.Cache{
-				IssuesByID:     make(map[int]*issues.Issue, res.TotalCount),
-				MilestonesByID: make(map[int]*issues.Milestone),
-				Users:          make(map[string]*issues.User),
 			}
 
 			cache.Issues = res.Items
@@ -151,9 +151,4 @@ func getID(w http.ResponseWriter, r *http.Request) int {
 		}
 	}
 	return num
-}
-
-func formatDate(t time.Time) string {
-	f := t.Format("02.01.2006 | ")
-	return f + strconv.Itoa(int(time.Since(t).Hours()/24)) + "ago"
 }

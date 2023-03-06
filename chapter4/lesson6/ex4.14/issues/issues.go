@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -75,16 +76,14 @@ func SearchIssues(terms string) (*IssueSearchResult, error) {
 		return nil, err
 	}
 	// Необходимо закрыть resp.Body на всех путях выполнения
+	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		resp.Body.Close()
-		return nil, fmt.Errorf("cбой запроса: %s", resp.Status)
+		return nil, fmt.Errorf("response error: %s", resp.Status)
 	}
 	var result IssueSearchResult
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		resp.Body.Close()
 		return nil, err
 	}
-	resp.Body.Close()
 	return &result, nil
 
 }
@@ -108,7 +107,7 @@ func (u *User) GetUser() (*User, error) {
 	}
 	if resp.StatusCode != http.StatusOK {
 		resp.Body.Close()
-		return nil, fmt.Errorf("cбой запроса: %s у пользователя %s", resp.Status, u.Login)
+		return nil, fmt.Errorf("response error: %s user %s", resp.Status, u.Login)
 	}
 	var result User
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
@@ -126,4 +125,8 @@ func (p *Issue) MilestoneURL() string {
 }
 func (u *User) UserURL() string {
 	return fmt.Sprintf("/user/%s", u.Login)
+}
+func (p *Issue) FormatDate() string {
+	f := p.CreatedAt.Format("02.01.2006 | ")
+	return f + strconv.Itoa(int(time.Since(p.CreatedAt).Hours()/24)) + " ago"
 }

@@ -32,7 +32,7 @@
         {{end}}
         <td>{{.State}}</td>
         <td><a href="{{.User.UserURL}}">{{.User.Login}}</a></td>
-        <td>{{.CreatedAt | formatDate}} days</td>
+        <td>{{.FormatDate}}</td>
     </tr>
     {{end}}
     </tbody>
