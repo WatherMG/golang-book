@@ -3,6 +3,10 @@ Exercise 5.15
 Напишите вариативные функции max и min, аналогичные функции sum.
 Что должны делать эти функции, будучи вызванными без аргументов?
 Напишите варианты функций, требующие как минимум одного аргумента.
+
+Write variadic functions max and min, analogous to sum.
+What should these functions do when called with no arguments?
+Write variants that require at least one argument.
 */
 
 package main
