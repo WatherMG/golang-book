@@ -2,6 +2,9 @@
 Exercise 5.11
 Преподаватель линейной алгебры (linear algebra) считает, что до его курса следует прослушать курс матанализа (calculus).
 Перепишите функцию topoSort так, чтобы она сообщала о наличии циклов.
+
+The instructor of the linear algebra course decides that calculus is now a prerequisite.
+Extend the topoSort function to report cycles.
 */
 
 package main
