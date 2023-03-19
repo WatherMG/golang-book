@@ -1,3 +1,7 @@
+/*
+Example 6.2
+urlvalues демонстрирует тип карты с методами
+*/
 package main
 
 import (
