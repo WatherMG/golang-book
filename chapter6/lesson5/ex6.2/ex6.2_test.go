@@ -19,7 +19,7 @@ func TestIntSet_AddAll(t *testing.T) {
 	s := initIntSet()
 	s.AddAll(101, 102, 103, 104)
 	s.AddAll(l...)
-	for _, v := range l {
+	for _, v := range l { // or check []int{101, 102, 103, 104}
 		if got := s.Has(v); !got {
 			t.Fatalf("set doesn't contain %d. Set: %s", v, s.String())
 		}
