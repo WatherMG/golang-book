@@ -19,7 +19,6 @@ func TestIntSet_Len(t *testing.T) {
 	if got := s.Len(); got != N {
 		t.Fatalf("got %d, want %d", got, N)
 	}
-	t.Logf("len=%d", s.Len())
 }
 
 func TestIntSet_Remove(t *testing.T) {

@@ -5,8 +5,6 @@ func (*IntSet) Len() int // Возвращает количество элеме
 func (*IntSet) Remove(x int) // Удаляет x из множества
 func (*IntSet) Clear() // Удаляет все элементы множества
 func (*IntSet) Copy() *IntSet // Возвращает копию множества
-
-
 */
 
 package intset
@@ -57,6 +55,24 @@ func (s *IntSet) Remove(x int) {
 func (s *IntSet) Len() int {
 	return s.count
 }
+
+//  Len другая реализация подсчета элементов
+// func (s *IntSet) Len() int {
+// 	c := 0
+// 	for _, v := range s.words {
+// 		c += popcount(v)
+// 	}
+// 	return c
+// }
+//
+// func popcount(x uint64) int {
+// 	count := 0
+// 	for x != 0 {
+// 		count++
+// 		x &= x - 1
+// 	}
+// 	return count
+// }
 
 // Has указывает, содержит ли множество неотрицательное значение x
 func (s *IntSet) Has(x int) bool {
