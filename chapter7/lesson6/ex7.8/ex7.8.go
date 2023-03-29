@@ -4,6 +4,14 @@ Exercise 7.8
 первичный ключ определяется по последнему щелчку на заголовке, вторичный — по-предпоследнему и т.д.
 Определите реализацию sort.Interface для использования в такой таблице.
 Сравните этот подход с многократной сортировкой с использованием sort.Stable.
+
+
+При использовании sort.Sort() элементы сортируются по одному значению. Это означает, что если два элемента имеют
+одинаковое значение, то порядок их следования в отсортированном списке может быть произвольным.
+
+При использовании sort.Stable() элементы сортируются по нескольким значениям. Если два элемента имеют одинаковые
+значения для всех полей, по которым они сортируются, то порядок их следования в отсортированном списке
+будет таким же, как и в исходном списке.
 */
 
 package main
@@ -26,10 +34,13 @@ type Track struct {
 
 func tracks() []*Track {
 	return []*Track{
+		{"Go", "Delilah", "From the Roots Up1", 2012, length("3m38s")},
+		{"Go", "Moby", "Moby", 1992, length("10m37s")},
 		{"Go", "Delilah", "From the Roots Up", 2012, length("3m38s")},
 		{"Go", "Moby", "Moby", 1992, length("3m37s")},
 		{"Go Ahead", "Alicia Keys", "As I Am", 2007, length("4m36s")},
 		{"Ready 2 Go", "Martin Solveig", "Smash", 2011, length("4m24s")},
+		{"Go", "Delilah1", "From the Roots Up", 2012, length("3m38s")},
 	}
 }
 
@@ -52,24 +63,6 @@ func printTracks(tracks []*Track) {
 	}
 	tw.Flush()
 }
-
-type byTitle []*Track
-
-func (x byTitle) Len() int           { return len(x) }
-func (x byTitle) Less(i, j int) bool { return x[i].Title < x[j].Title }
-func (x byTitle) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
-
-type byArtist []*Track
-
-func (x byArtist) Len() int           { return len(x) }
-func (x byArtist) Less(i, j int) bool { return x[i].Artist < x[j].Artist }
-func (x byArtist) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
-
-type byYear []*Track
-
-func (x byYear) Len() int           { return len(x) }
-func (x byYear) Less(i, j int) bool { return x[i].Year < x[j].Year }
-func (x byYear) Swap(i, j int)      { x[i], x[j] = x[j], x[i] }
 
 func colTitle(x, y *Track) bool  { return x.Title < y.Title }
 func colArtist(x, y *Track) bool { return x.Artist < y.Artist }
@@ -113,15 +106,13 @@ func (x *customSort) Swap(i, j int) { x.tracks[i], x.tracks[j] = x.tracks[j], x.
 
 func useSortByColumns() []*Track {
 	t := tracks()
-	sort.Sort(sortByColumns(t, colArtist, colTitle, colYear))
+	sort.Sort(sortByColumns(t, colTitle, colArtist))
 	return t
 }
 
 func useSortStable() []*Track {
 	t := tracks()
-	sort.Stable(byArtist(t))
-	sort.Stable(byTitle(t))
-	sort.Stable(byYear(t))
+	sort.Stable(sortByColumns(t, colTitle, colArtist))
 	return t
 }
 
