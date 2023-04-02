@@ -1,0 +1,21 @@
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+    <form method="post" action="/calc" style="">
+        <fieldset style="background: #f6f8ff; border: 2px solid #4238ca; width: 220px">
+            <legend>Calc data</legend>
+            <label for="expr">Expr:</label>
+            <input id="expr" type="text" name="expr" placeholder="Enter expr">
+            <br>
+            <label for="env" >Env: </label>
+            <input id="env" type="text" name="env" placeholder="x=1 y:2 z 4 e{2} f[2] a\2">
+            <br>
+            <input type="submit" value="calculate">
+        </fieldset>
+    </form>
+<p>Result:{{ .}}</p>
+</body>
+</html>
