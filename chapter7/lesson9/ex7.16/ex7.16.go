@@ -44,8 +44,7 @@ func calc(w http.ResponseWriter, r *http.Request) {
 		fmt.Errorf("%v", err)
 		return
 	}
-	e := r.PostFormValue("env")
-	env, err := parseEnv(e)
+	env, err := parseEnv(r.PostFormValue("env"))
 	if err != nil {
 		fmt.Errorf("%v", err)
 		return
