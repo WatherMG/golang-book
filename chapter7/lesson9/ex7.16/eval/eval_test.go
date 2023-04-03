@@ -84,7 +84,7 @@ func TestCoverage(t *testing.T) {
 	var tests = []struct {
 		input string
 		env   Env
-		want  string // expected error from Parse/Check or result from Eval
+		want  string // expected error from Parse/Check or result from Eval.
 	}{
 		{"x % 2", nil, "unexpected '%'"},
 		{"!true", nil, "unexpected '!'"},

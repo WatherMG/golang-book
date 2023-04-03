@@ -33,7 +33,7 @@ func (lex *lexer) describe() string {
 	case scanner.Int, scanner.Float:
 		return fmt.Sprintf("number %s", lex.text())
 	}
-	return fmt.Sprintf("%q", rune(lex.token)) // any other rune
+	return fmt.Sprintf("%q", rune(lex.token)) // any other rune.
 }
 
 func precedence(op rune) int {
@@ -96,7 +96,7 @@ func parseBinary(lex *lexer, prec1 int) Expr {
 	return lhs
 }
 
-// unary = '+' expr | primary | primary '!'
+// unary = '+' expr | primary | primary '!'.
 func parseUnary(lex *lexer) Expr {
 	if lex.token == '+' || lex.token == '-' {
 		op := lex.token

@@ -23,7 +23,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, _ *http.Request) {
 	tmpl := template.Must(template.ParseFiles("chapter7/lesson9/ex7.16/index.html"))
 	if err := tmpl.Execute(w, nil); err != nil {
 		log.Fatal(err)
@@ -41,12 +41,12 @@ func calc(w http.ResponseWriter, r *http.Request) {
 	}
 	expr, err := eval.Parse(s)
 	if err != nil {
-		fmt.Errorf("%v", err)
+		fmt.Errorf("%w", err)
 		return
 	}
 	env, err := parseEnv(r.PostFormValue("env"))
 	if err != nil {
-		fmt.Errorf("%v", err)
+		fmt.Errorf("%w", err)
 		return
 	}
 	if err := tmpl.Execute(w, expr.Eval(env)); err != nil {

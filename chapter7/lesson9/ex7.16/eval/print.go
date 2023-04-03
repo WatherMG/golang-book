@@ -12,7 +12,7 @@ import (
 )
 
 // Format форматирует выражение как строку.
-// Он не пытается удалить ненужные символы
+// Он не пытается удалить ненужные символы.
 func Format(e Expr) string {
 	var buf bytes.Buffer
 	write(&buf, e)

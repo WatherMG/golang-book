@@ -24,32 +24,32 @@ import (
 	"strings"
 )
 
-// StringWriter - интерфейc, который имеет только один метод WriteString
+// StringWriter - интерфейc, который имеет только один метод WriteString.
 type StringWriter interface {
 	WriteString(string) (n int, err error)
 }
 
-// WriteString - функция, которая записывает строку s в w
-// Если w имеет метод WriteString, он вызывается вместо w.Write
+// WriteString - функция, которая записывает строку s в w.
+// Если w имеет метод WriteString, он вызывается вместо w.Write.
 func writeString(w io.Writer, s string) (n int, err error) {
 	// Проверка типа с помощью декларации типа: проверяет соответствует ли динамический тип w
-	// интерфейсу StringWriter
+	// интерфейсу StringWriter.
 	if sw, ok := w.(StringWriter); ok {
 		return sw.WriteString(s) // Избегаем копирования.
-		// Запись происходит в реализации метода WriteString для конкретного типа. В данном случае в *strings.Builder
+		// Запись происходит в реализации метода WriteString для конкретного типа. В данном случае в *strings.Builder.
 	}
-	return w.Write([]byte(s)) // Используем временную копию
+	return w.Write([]byte(s)) // Используем временную копию.
 }
 
 func main() {
-	// Создаем объекты типов *os.File, *strings.Builder
+	// Создаем объекты типов *os.File, *strings.Builder.
 	file, err := os.Create("test.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	builder := &strings.Builder{}
 
-	// Записываем строку в каждый из этих объектов с помощью функции writeString
+	// Записываем строку в каждый из этих объектов с помощью функции writeString.
 	if _, err := writeString(file, "Hello, file\n"); err != nil {
 		log.Fatal(err)
 	}
@@ -57,10 +57,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Выводим содержимое объекта типа *strings.Builder
+	// Выводим содержимое объекта типа *strings.Builder.
 	fmt.Println(builder.String())
 
-	// Закрываем файл
+	// Закрываем файл.
 	err = file.Close()
 	if err != nil {
 		log.Fatal(err)

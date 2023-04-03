@@ -1,6 +1,6 @@
 package eval
 
-// Expr представляет арифметическое выражение
+// Expr представляет арифметическое выражение.
 type Expr interface {
 	// Eval возвращает значение данного Expr в среде env.
 	Eval(env Env) float64

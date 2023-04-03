@@ -10,7 +10,7 @@ func (v Var) Check(vars map[Var]bool) error {
 	return nil
 }
 
-func (literal) Check(vars map[Var]bool) error {
+func (literal) Check(map[Var]bool) error {
 	return nil
 }
 
