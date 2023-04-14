@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"strconv"
 	"strings"
 	"text/tabwriter"
 )
@@ -73,11 +74,41 @@ CLOSE:
 				}
 				fmt.Fprintf(conn, "%s\n", file)
 			}
+		case "send":
+			if err := writeFile(conn, args, sc); err != nil {
+				fmt.Fprintf(conn, "send file error: %v", err)
+			}
 		}
 	}
 	if sc.Err() != nil {
 		fmt.Fprintln(conn, sc.Err().Error())
 	}
+}
+
+func writeFile(w io.Writer, args []string, sc *bufio.Scanner) error {
+	filename := args[1]
+	file, err := os.Create("__" + filename)
+	if err != nil {
+		fmt.Fprint(w, err)
+		return err
+	}
+	defer func(f *os.File) {
+		f.Close()
+		fmt.Fprintf(w, "%s sent. filename=%q\n", filename, f.Name())
+	}(file)
+
+	c, err := strconv.Atoi(args[2])
+	if err != nil {
+		log.Println(err)
+	}
+	var data string
+	for i := 0; i < c && sc.Scan(); i++ {
+		data += sc.Text() + "\n"
+	}
+
+	fmt.Fprintln(file, strings.TrimSuffix(data, "\n\n"))
+	log.Printf("get file: %q", file.Name())
+	return sc.Err()
 }
 
 func ls(w io.Writer, dir string) error {

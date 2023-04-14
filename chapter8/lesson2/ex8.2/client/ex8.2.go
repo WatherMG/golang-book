@@ -11,6 +11,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"log"
@@ -43,12 +44,32 @@ CLOSE:
 			break CLOSE
 		case "cd", "ls", "get":
 			fmt.Fprintln(conn, sc.Text())
+		case "send":
+			if len(args) < 2 {
+				fmt.Fprintf(conn, "empty filename")
+				continue
+			}
+			file, err := os.ReadFile(args[1])
+			if err != nil {
+				fmt.Fprint(conn, err)
+			}
+			if _, err := fmt.Fprintf(conn, "%s %d\n%s\n", sc.Text(), countLines(file), file); err != nil {
+				fmt.Fprint(conn, err)
+			}
 		default:
 			fmt.Fprintf(conn, "%s is not supported\n", cmd)
 			continue
 		}
 	}
 
+}
+
+func countLines(file []byte) (res int) {
+	sc := bufio.NewScanner(bytes.NewReader(file))
+	for sc.Scan() {
+		res++
+	}
+	return res
 }
 
 func mustCopy(dst io.Writer, src io.Reader) {
