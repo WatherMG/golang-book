@@ -1,3 +1,6 @@
+/*
+Example 8.8
+*/
 package main
 
 import (

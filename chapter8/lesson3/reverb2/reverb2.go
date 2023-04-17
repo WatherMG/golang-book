@@ -1,3 +1,8 @@
+/*
+Example 8.7
+Reverb - это TCP-сервер, имитирующий эхо.
+*/
+
 package main
 
 import (
