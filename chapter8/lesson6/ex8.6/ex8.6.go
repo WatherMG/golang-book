@@ -12,11 +12,14 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 
 	"GolangBook/chapter5/lesson6/links"
 )
 
 var maxDepth int
+
+var wg sync.WaitGroup
 
 type work struct {
 	url   string
@@ -28,6 +31,7 @@ type work struct {
 var tokens = make(chan struct{}, 20)
 
 func crawl(w work) []work {
+	defer wg.Done()
 	fmt.Printf("Depth: %d, URL: %s\n", w.depth, w.url)
 
 	if w.depth >= maxDepth {
@@ -73,10 +77,12 @@ func main() {
 			if !seen[w.url] {
 				seen[w.url] = true
 				n++
+				wg.Add(1)
 				go func(w work) {
 					worklist <- crawl(w)
 				}(w)
 			}
 		}
+		wg.Wait()
 	}
 }
