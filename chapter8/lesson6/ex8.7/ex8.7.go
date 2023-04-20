@@ -11,7 +11,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -62,9 +61,6 @@ func download(base, url string) {
 		log.Println(err)
 	}
 	ext := "index.html"
-	if dir != "" {
-		ext = "_" + ext
-	}
 	filename := dir + ext
 	f, err := os.Create(filename)
 	if err != nil {
@@ -81,7 +77,6 @@ func download(base, url string) {
 var tokens = make(chan struct{}, 20)
 
 func crawl(url string) []string {
-	fmt.Println(url)
 	tokens <- struct{}{}
 	list, err := links.Extract(url)
 	<-tokens
