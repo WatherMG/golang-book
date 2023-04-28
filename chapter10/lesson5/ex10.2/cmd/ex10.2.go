@@ -5,6 +5,7 @@
 могла быть добавлена с помощью пустого импорта.
 
 Решение https://github.com/linehk/gopl/tree/main/ch10/exercise10.2
+Проблема: не разобрался в формулировке задачи.
 */
 
 package main

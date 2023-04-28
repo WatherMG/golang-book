@@ -12,7 +12,7 @@ import (
 	_ "GolangBook/chapter10/lesson5/ex10.2/archive/zip"
 )
 
-func TestTar(t *testing.T) {
+func TestArchives(t *testing.T) {
 	// tar
 	tf, err := os.Open("cmd/tar.tar")
 	if err != nil {
