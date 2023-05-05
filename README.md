@@ -9,7 +9,7 @@
 которыми я столкнулся во время их решения, и как я решил эти проблемы.
 
 Если вам понравился этот репозиторий и вы сочли его полезным, пожалуйста, поставьте звезду ⭐️. Это поможет другим людям
-найти этот проект и воспользоваться им.
+найти этот проект и воспользоваться им. 
 
 <details>
 <summary>English</summary>
@@ -286,3 +286,10 @@ All links lead to a specific chapter of the book.
 	* [ ] [13.5. Еще одно предостережение](./chapter13/lesson5)
 
 </details>
+
+### Позелные материалы:
+
+* [Установка Go и настройка локальной среды программирования в Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-go-and-set-up-a-local-programming-environment-on-ubuntu-18-04-ru)
+* [Репозиторий примерами кода автора книги](https://github.com/adonovan/gopl.io/tree/master)
+* [Music for coding](https://lofimusic.app/) Написан на Go [Repo](https://github.com/maxence-charriere/lofimusic)
+* [Linter for Go (golangci-lint)](https://github.com/golangci/golangci-lint)
