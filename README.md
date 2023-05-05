@@ -289,7 +289,7 @@ All links lead to a specific chapter of the book.
 
 ### Полезные материалы:
 
-* [Выдержка выводов из книги в формате epub](https://github.com/WatherMG/golang-book/blob/main/Summary.epub)
+* [Выдержка выводов из книги в формате epub](https://raw.githubusercontent.com/WatherMG/golang-book/main/Summary.epub)
 * [Установка Go и настройка локальной среды программирования в Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-go-and-set-up-a-local-programming-environment-on-ubuntu-18-04-ru)
 * [Репозиторий примерами кода автора книги](https://github.com/adonovan/gopl.io/tree/master)
 * [Music for coding](https://lofimusic.app/) Написан на Go [Repo](https://github.com/maxence-charriere/lofimusic)
